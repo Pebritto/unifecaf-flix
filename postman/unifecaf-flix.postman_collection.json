@@ -1,0 +1,23 @@
+{
+  "info": {
+    "name": "UniFECAF Flix API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000/v1/controle-filmes" }
+  ],
+  "item": [
+    {
+      "name": "Listar todos os filmes",
+      "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/filme", "host": ["{{baseUrl}}"], "path": ["filme"] } }
+    },
+    {
+      "name": "Buscar filme por ID",
+      "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/filme/1", "host": ["{{baseUrl}}"], "path": ["filme", "1"] } }
+    },
+    {
+      "name": "Filtrar filmes por nome/sinopse",
+      "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/filtro/filme?nome=star", "host": ["{{baseUrl}}"], "path": ["filtro", "filme"], "query": [{ "key": "nome", "value": "star" }] } }
+    }
+  ]
+}
