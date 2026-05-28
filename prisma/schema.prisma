@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Filme {
+  id        Int      @id @default(autoincrement())
+  nome      String   @db.VarChar(255)
+  sinopse   String?  @db.Text
+  ano       Int?
+  duracao   String?  @db.VarChar(20)
+  diretor   String?  @db.VarChar(255)
+  genero    String?  @db.VarChar(255)
+  elenco    String?  @db.VarChar(500)
+  notaImdb  Decimal? @map("nota_imdb") @db.Decimal(3, 1)
+
+  @@map("filme")
+}
