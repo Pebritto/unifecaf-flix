@@ -137,7 +137,38 @@ async function filtrar(termo) {
 
 ## 6. Capturas de tela (Postman)
 
-> **A inserir pelo aluno:** importe `postman/unifecaf-flix.postman_collection.json` no Postman, execute os 3 endpoints com a API rodando e cole aqui os prints de cada resposta (mostrando o JSON e o status code). Sugestão de prints:
-> 1. `GET /filme` retornando a lista (200)
-> 2. `GET /filme/1` retornando um filme (200) e `GET /filme/999999` retornando 404
-> 3. `GET /filtro/filme?nome=star` retornando os resultados (200)
+Testes executados no Postman com a API rodando e o banco populado (200 filmes).
+
+### 6.1 Endpoints obrigatórios
+
+**Listar todos os filmes** — `GET /v1/controle-filmes/filme` → `200 OK` (200 itens):
+
+![Listar todos os filmes](prints/01-listar-todos.png)
+
+**Buscar filme por ID** — `GET /v1/controle-filmes/filme/1` → `200 OK`:
+
+![Buscar filme por ID](prints/02-buscar-por-id.png)
+
+**Filtrar por nome** — `GET /v1/controle-filmes/filtro/filme?nome=star`:
+
+![Filtrar por nome](prints/03-filtrar-por-nome.png)
+
+### 6.2 Tratamento de erros e validações
+
+**ID inexistente** — `GET /v1/controle-filmes/filme/9999999` → `404 Not Found`:
+
+![ID inexistente retorna 404](prints/04-id-inexistente-404.png)
+
+**ID inválido** — `GET /v1/controle-filmes/filme/abc` → `400 Bad Request`:
+
+![ID inválido retorna 400](prints/05-id-invalido-400.png)
+
+**Filtro sem o parâmetro `nome`** — `GET /v1/controle-filmes/filtro/filme` → `400 Bad Request`:
+
+![Filtro sem parâmetro retorna 400](prints/06-filtro-sem-parametro-400.png)
+
+### 6.3 Filtro também busca na sinopse
+
+**Filtro por `nome=Nolan`** — o termo não aparece em nenhum título, mas sim na sinopse (diretor). Retorna `200 OK` com resultados, comprovando o `OR` entre nome e sinopse:
+
+![Filtro pela sinopse](prints/07-filtro-sinopse-nolan-200.png)
